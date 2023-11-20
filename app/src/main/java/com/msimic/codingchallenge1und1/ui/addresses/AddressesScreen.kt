@@ -3,6 +3,7 @@ package com.msimic.codingchallenge1und1.ui.addresses
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,12 +18,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.msimic.codingchallenge1und1.ui.common.CustomSearchBar
 import com.msimic.codingchallenge1und1.ui.theme.CodingChallenge1und1Theme
 import com.msimic.codingchallenge1und1.ui.theme.Grey20
 
 @Composable
 fun AddressesScreen(
-    viewModel: AddressesViewModel = hiltViewModel()
+    viewModel: AddressesViewModel = hiltViewModel(),
 ) {
     Surface(
         color = MaterialTheme.colorScheme.background,
@@ -30,7 +32,14 @@ fun AddressesScreen(
     ) {
         val salesmen by viewModel.salesmen.collectAsState(initial = listOf())
         Column {
-            Spacer(modifier = Modifier.height(64.dp))
+            CustomSearchBar(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 24.dp)
+                    .fillMaxWidth(),
+                query = viewModel.searchQuery,
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
 
             LazyColumn {
                 items(items = salesmen) { salesman ->
