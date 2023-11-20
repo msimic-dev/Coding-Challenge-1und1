@@ -12,5 +12,5 @@ val Pink40 = Color(0xFF7D5260)
 
 val DarkBlue = Color(0xFF327FF0)
 val Grey400 = Color(0xFF999999)
-val Grey40 = Color(0xFFC6C5C9)
-val Grey20 = Color(0xFFC6C5C9)
+val Grey300 = Color(0xFFC6C5C9)
+val Grey200 = Color(0xFFE5E5E5)

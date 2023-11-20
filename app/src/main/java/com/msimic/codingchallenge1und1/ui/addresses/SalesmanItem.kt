@@ -1,6 +1,7 @@
 package com.msimic.codingchallenge1und1.ui.addresses
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.msimic.codingchallenge1und1.data.model.Salesman
 import com.msimic.codingchallenge1und1.ui.theme.CodingChallenge1und1Theme
-import com.msimic.codingchallenge1und1.ui.theme.Grey40
+import com.msimic.codingchallenge1und1.ui.theme.Grey200
 import com.msimic.codingchallenge1und1.ui.theme.Grey400
 
 @Composable
@@ -75,9 +76,10 @@ fun FirstLetterIndicator(
 ) {
     Box(
         modifier = modifier
-            .background(Grey40, CircleShape)
+            .background(Grey200, CircleShape)
             .size(42.dp)
             .clip(CircleShape)
+            .border(1.dp, color = Grey400, shape = CircleShape)
     ) {
         Text(
             text = letter.toString(),

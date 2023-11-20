@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.msimic.codingchallenge1und1.ui.common.CustomSearchBar
 import com.msimic.codingchallenge1und1.ui.theme.CodingChallenge1und1Theme
-import com.msimic.codingchallenge1und1.ui.theme.Grey20
+import com.msimic.codingchallenge1und1.ui.theme.Grey300
 
 @Composable
 fun AddressesScreen(
@@ -37,6 +37,9 @@ fun AddressesScreen(
                     .padding(horizontal = 16.dp, vertical = 24.dp)
                     .fillMaxWidth(),
                 query = viewModel.searchQuery,
+                onQueryChange = { newQuery ->
+                    viewModel.searchQuery = newQuery
+                }
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -45,7 +48,7 @@ fun AddressesScreen(
                 items(items = salesmen) { salesman ->
                     SalesmanItem(salesman = salesman)
                     Divider(
-                        color = Grey20,
+                        color = Grey300,
                         modifier = Modifier.padding(horizontal = 16.dp)
                     )
                 }
