@@ -1,5 +1,7 @@
 package com.msimic.codingchallenge1und1.di
 
+import com.msimic.codingchallenge1und1.data.repository.SalesmanRepository
+import com.msimic.codingchallenge1und1.data.repository.SalesmanRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,6 +17,12 @@ object AppModule {
     @IODispatcher
     @Provides
     fun providesIODispatcher(): CoroutineDispatcher = Dispatchers.IO
+
+    @Provides
+    @Singleton
+    fun bindSalesmanRepositoryImpl(
+        @IODispatcher dispatcher: CoroutineDispatcher
+    ): SalesmanRepository = SalesmanRepositoryImpl(dispatcher)
 }
 
 @Retention(AnnotationRetention.RUNTIME)
