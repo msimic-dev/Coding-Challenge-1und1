@@ -6,7 +6,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,8 +25,6 @@ class SalesmanRepositoryImpl @Inject constructor(
 
     override fun getSalesmen(): Flow<List<Salesman>> = flow {
         delay(1000)
-        withContext(ioDispatcher) {
-            emit(activeSalesmen)
-        }
-    }
+        emit(activeSalesmen)
+    }.flowOn(ioDispatcher)
 }

@@ -1,6 +1,7 @@
 package com.msimic.codingchallenge1und1.ui.addresses
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,13 +12,17 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,9 +38,14 @@ fun SalesmanItem(
     isCollapsed: Boolean = true,
     onClick: () -> Unit = {},
 ) {
+    var collapsed by remember { mutableStateOf(isCollapsed) }
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .clickable {
+                onClick()
+                collapsed = !collapsed
+            }
             .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -43,11 +53,14 @@ fun SalesmanItem(
 
         DetailsSection(
             salesman = salesman,
-            isCollapsed = isCollapsed,
+            isCollapsed = collapsed,
+            modifier = modifier.weight(1f),
         )
 
+        val isCollapsedImageVector =
+            if (collapsed) Icons.Default.KeyboardArrowRight else Icons.Default.KeyboardArrowDown
         Icon(
-            imageVector = Icons.Default.KeyboardArrowDown,
+            imageVector = isCollapsedImageVector,
             tint = Grey400,
             contentDescription = "Collapsed state item",
         )
@@ -56,17 +69,18 @@ fun SalesmanItem(
 
 @Composable
 fun FirstLetterIndicator(
+    modifier: Modifier = Modifier,
     letter: Char,
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .background(Grey40, CircleShape)
             .size(42.dp)
             .clip(CircleShape)
     ) {
         Text(
             text = letter.toString(),
-            modifier = Modifier.align(Alignment.Center),
+            modifier = modifier.align(Alignment.Center),
             fontSize = 24.sp,
         )
     }
@@ -74,11 +88,12 @@ fun FirstLetterIndicator(
 
 @Composable
 fun DetailsSection(
+    modifier: Modifier = Modifier,
     salesman: Salesman,
     isCollapsed: Boolean,
 ) {
     Column(
-        modifier = Modifier.padding(8.dp),
+        modifier = modifier.padding(8.dp),
         verticalArrangement = Arrangement.Center,
     ) {
         Text(
@@ -98,7 +113,21 @@ fun DetailsSection(
 
 @Preview
 @Composable
-fun SalesmanItemPreview() {
+fun SalesmanItemCollapsedPreview() {
+    CodingChallenge1und1Theme {
+        SalesmanItem(
+            salesman = Salesman(
+                name = "Bart Simpson",
+                areas = listOf("12345", "999*"),
+            ),
+            isCollapsed = true,
+        )
+    }
+}
+
+@Preview
+@Composable
+fun SalesmanItemExpandedPreview() {
     CodingChallenge1und1Theme {
         SalesmanItem(
             salesman = Salesman(
