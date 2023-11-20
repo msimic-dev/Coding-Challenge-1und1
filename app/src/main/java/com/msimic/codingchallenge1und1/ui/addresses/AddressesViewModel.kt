@@ -9,4 +9,5 @@ import javax.inject.Inject
 class AddressesViewModel @Inject constructor(
     private val repository: SalesmanRepository,
 ) : ViewModel() {
+    val salesmen = repository.getSalesmen()
 }
