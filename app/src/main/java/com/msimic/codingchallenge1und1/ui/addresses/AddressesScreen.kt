@@ -30,16 +30,17 @@ fun AddressesScreen(
         color = MaterialTheme.colorScheme.background,
         modifier = Modifier.fillMaxSize(),
     ) {
-        val salesmen by viewModel.salesmen.collectAsState(initial = listOf())
+        val salesmen by viewModel.salesmen.collectAsState(listOf())
+        val query by viewModel.query.collectAsState()
         Column {
             CustomSearchBar(
                 modifier = Modifier
                     .padding(horizontal = 16.dp, vertical = 24.dp)
                     .fillMaxWidth(),
-                query = viewModel.searchQuery,
+                query = query,
                 onQueryChange = { newQuery ->
-                    viewModel.searchQuery = newQuery
-                }
+                    viewModel.changeQuery(newQuery)
+                },
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -49,7 +50,7 @@ fun AddressesScreen(
                     SalesmanItem(salesman = salesman)
                     Divider(
                         color = Grey300,
-                        modifier = Modifier.padding(horizontal = 16.dp)
+                        modifier = Modifier.padding(horizontal = 16.dp),
                     )
                 }
             }

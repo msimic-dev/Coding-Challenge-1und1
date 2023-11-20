@@ -4,5 +4,5 @@ import com.msimic.codingchallenge1und1.data.model.Salesman
 import kotlinx.coroutines.flow.Flow
 
 interface SalesmanRepository {
-    fun getSalesmen(): Flow<List<Salesman>>
+    fun getSalesmen(query: String): Flow<List<Salesman>>
 }

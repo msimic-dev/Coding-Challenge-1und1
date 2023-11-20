@@ -69,7 +69,7 @@ fun CustomSearchBar(
         colors = TextFieldDefaults.colors(
             unfocusedContainerColor = Color.White,
             focusedContainerColor = Color.White,
-        )
+        ),
     )
 }
 
