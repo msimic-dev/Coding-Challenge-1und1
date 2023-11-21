@@ -1,5 +1,6 @@
 package com.msimic.codingchallenge1und1.ui.addresses
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -106,7 +107,7 @@ fun DetailsSection(
             overflow = TextOverflow.Ellipsis,
         )
 
-        if (!isCollapsed) {
+        AnimatedVisibility(!isCollapsed) {
             Text(
                 text = salesman.areasString,
                 color = Grey400,

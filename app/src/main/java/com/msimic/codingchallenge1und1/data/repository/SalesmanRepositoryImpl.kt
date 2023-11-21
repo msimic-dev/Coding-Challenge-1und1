@@ -26,10 +26,15 @@ class SalesmanRepositoryImpl @Inject constructor(
         )
     ).flowOn(ioDispatcher)
 
+    /**
+     * Get all salesmen, that work in the queried area. If query is empty return all salesmen.
+     *
+     * @param query representing a valid postal code expression.
+     * @return a list containing all salesmen that match the query.
+     */
     override fun getSalesmen(
         query: String,
     ): Flow<List<Salesman>> {
-        Log.d("TAG", "query-repository: $query")
         return if (query.isNotEmpty()) {
             allSalesmen.map { salesmenList ->
                 salesmenList.filter { salesman -> salesman.isResponsibleForArea(query) }

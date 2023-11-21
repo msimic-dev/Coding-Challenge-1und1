@@ -10,6 +10,12 @@ data class Salesman(
     val areasString: String
         get() = areas.joinToString(", ")
 
+    /**
+     * Validate, if salesman is responsible for the area.
+     *
+     * @param area valid postal code expression to validate
+     * @return true if the salesman is working in the area, false otherwise
+     */
     fun isResponsibleForArea(area: String): Boolean {
         val intRangeArea = area.replace("*", "").convertAreaToRange()
         return areas.any { responsibleArea ->

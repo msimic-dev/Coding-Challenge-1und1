@@ -1,9 +1,5 @@
 package com.msimic.codingchallenge1und1.ui.addresses
 
-import android.util.Log
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.msimic.codingchallenge1und1.data.repository.SalesmanRepository
@@ -11,13 +7,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapMerge
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,7 +25,7 @@ class AddressesViewModel @Inject constructor(
     private var areaFilter = MutableStateFlow("")
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val salesmen = areaFilter.flatMapMerge { areaFilter ->
+    val queriedSalesmen = areaFilter.flatMapMerge { areaFilter ->
         repository.getSalesmen(areaFilter)
     }
 

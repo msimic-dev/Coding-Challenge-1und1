@@ -30,7 +30,7 @@ fun AddressesScreen(
         color = MaterialTheme.colorScheme.background,
         modifier = Modifier.fillMaxSize(),
     ) {
-        val salesmen by viewModel.salesmen.collectAsState(listOf())
+        val salesmen by viewModel.queriedSalesmen.collectAsState(listOf())
         val query by viewModel.query.collectAsState()
         Column {
             CustomSearchBar(
